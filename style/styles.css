@@ -1,59 +1,280 @@
-body {
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-  text-align: center;
+/* =========================
+   RESET
+========================= */
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: #0f172a;
+
+  color: white;
+
+  min-height: 100vh;
+
+  transition: background 0.5s ease;
+
   padding: 20px;
 }
 
-.card {
-  background: #1e293b;
-  padding: 15px;
-  margin: 10px auto;
-  border-radius: 12px;
-  width: 220px;
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin: auto;
 }
 
-.value {
-  font-size: 28px;
-  font-weight: bold;
+/* =========================
+   HEADER
+========================= */
+
+header {
+  text-align: center;
+
+  margin-bottom: 25px;
 }
+
+header h1 {
+  font-size: 2.2rem;
+
+  margin-bottom: 8px;
+}
+
+header p {
+  color: #94a3b8;
+}
+
+/* =========================
+   ALERTA
+========================= */
+
+#alerta {
+  display: none;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  margin-bottom: 20px;
+
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+  display: flex;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  margin-bottom: 25px;
+}
+
+/* CARD */
+
+.card {
+  flex: 1 1 250px;
+
+  background: #1e293b;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  min-height: 180px;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+
+  transition: 0.3s;
+
+  /* CENTRALIZAÇÃO */
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* TITULO */
+
+.card h2 {
+  margin-bottom: 15px;
+
+  color: #cbd5e1;
+
+  font-size: 1.1rem;
+
+  text-align: center;
+}
+
+/* =========================
+   VALUES
+========================= */
+
+.value {
+  font-size: 2.4rem;
+
+  font-weight: bold;
+
+  margin-top: 5px;
+}
+
+/* TEMPERATURA */
 
 .temp {
   color: #ef4444;
 }
 
+/* UMIDADE */
+
 .hum {
   color: #3b82f6;
 }
 
+/* STATUS */
+
 #status {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1.8rem;
+
+  color: #22c55e;
 }
 
-#alerta {
-  display: none;
-  background: #ef4444;
-  padding: 10px;
-  margin: 10px auto;
-  border-radius: 8px;
-  max-width: 400px;
-  font-weight: bold;
-}
+/* =========================
+   GRAFICO
+========================= */
 
 .chart-container {
-  width: 100%;
-  max-width: 900px;
-  height: 400px;
-  margin: auto;
   background: #1e293b;
-  border-radius: 12px;
-  padding: 10px;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  height: 450px;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 canvas {
   width: 100% !important;
+
   height: 100% !important;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .chart-container {
+    height: 350px;
+  }
+
+  .value {
+    font-size: 2rem;
+  }
+
+  .card {
+    min-height: 160px;
+  }
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+
+    min-height: 140px;
+  }
+
+  .value {
+    font-size: 1.7rem;
+  }
+
+  #status {
+    font-size: 1.5rem;
+  }
+
+  .chart-container {
+    height: 260px;
+
+    padding: 12px;
+  }
+
+  #alerta {
+    font-size: 0.9rem;
+  }
 }

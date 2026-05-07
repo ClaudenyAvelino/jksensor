@@ -1,42 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>IoT Dashboard JkSensor</title>
-    <link rel="stylesheet" href="style/styles.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/styles.css" />
+
+    <!-- MQTT -->
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
 
-    <h2>📊 Dashboard IoT (ESP + HiveMQ + Vercel)</h2>
+    <div class="container">
 
-    <div id="alerta">🚨 TEMPERATURA CRÍTICA!</div>
+        <!-- HEADER -->
+        <header>
+            <h1>📊 Dashboard IoT</h1>
+            <p>ESP32 + HiveMQ + Vercel</p>
+        </header>
 
-    <div class="card">
-        📡 Status MQTT
-        <div id="status">DESCONECTADO</div>
+        <!-- ALERTA -->
+        <div id="alerta">
+            🚨 TEMPERATURA CRÍTICA!
+        </div>
+
+        <!-- STATUS -->
+        <div class="cards">
+
+            <div class="card status-card">
+                <h2>📡 Status MQTT</h2>
+
+                <div id="status" class="value">
+                    DESCONECTADO
+                </div>
+            </div>
+
+            <!-- TEMPERATURA -->
+            <div class="card">
+                <h2>🌡️ Temperatura</h2>
+
+                <div id="temp" class="value temp">
+                    --
+                </div>
+            </div>
+
+            <!-- UMIDADE -->
+            <div class="card">
+                <h2>💧 Umidade</h2>
+
+                <div id="hum" class="value hum">
+                    --
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GRAFICO -->
+        <div class="chart-container">
+
+            <canvas id="grafico"></canvas>
+
+        </div>
+
     </div>
 
-    <div class="card">
-        🌡️ Temperatura
-        <div id="temp" class="value temp">--</div>
-    </div>
-
-    <div class="card">
-        💧 Umidade
-        <div id="hum" class="value hum">--</div>
-    </div>
-
-    <div class="chart-container">
-        <canvas id="grafico"></canvas>
-    </div>
-
+    <!-- JS -->
     <script src="js/script.js"></script>
 
 </body>
