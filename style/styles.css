@@ -23,7 +23,7 @@ body {
 
   transition: background 0.5s ease;
 
-  padding: 20px;
+  padding: 12px;
 }
 
 /* =========================
@@ -45,19 +45,19 @@ body {
 header {
   text-align: center;
 
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 1.6rem;
 
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 header p {
   color: #94a3b8;
 
-  font-size: 0.95rem;
+  font-size: 0.82rem;
 }
 
 /* =========================
@@ -71,31 +71,17 @@ header p {
 
   color: white;
 
-  padding: 12px;
+  padding: 10px;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   font-weight: bold;
 
   text-align: center;
 
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.02);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+  font-size: 0.9rem;
 }
 
 /* =========================
@@ -105,13 +91,11 @@ header p {
 .cards {
   display: flex;
 
-  gap: 16px;
-
   flex-wrap: wrap;
 
-  justify-content: center;
+  gap: 10px;
 
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 /* =========================
@@ -119,21 +103,18 @@ header p {
 ========================= */
 
 .card {
-  flex: 1 1 220px;
+  flex: 1 1 200px;
 
   background: #1e293b;
 
-  border-radius: 14px;
+  border-radius: 12px;
 
-  padding: 16px;
+  padding: 10px;
 
-  min-height: 120px;
+  min-height: 85px;
 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
 
-  transition: 0.3s;
-
-  /* CENTRALIZAÇÃO */
   display: flex;
 
   flex-direction: column;
@@ -145,24 +126,18 @@ header p {
   text-align: center;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-}
-
 /* =========================
    TITULO CARD
 ========================= */
 
 .card h2 {
-  margin-bottom: 8px;
+  font-size: 0.92rem;
+
+  margin-bottom: 4px;
 
   color: #cbd5e1;
 
-  font-size: 1rem;
-
   font-weight: 600;
-
-  line-height: 1.2;
 }
 
 /* =========================
@@ -170,35 +145,27 @@ header p {
 ========================= */
 
 .value {
-  font-size: 2rem;
+  font-size: 1.5rem;
 
   font-weight: bold;
 
-  line-height: 1.1;
+  line-height: 1;
 }
 
 /* =========================
-   TEMPERATURA
+   CORES
 ========================= */
 
 .temp {
   color: #ef4444;
 }
 
-/* =========================
-   UMIDADE
-========================= */
-
 .hum {
   color: #3b82f6;
 }
 
-/* =========================
-   STATUS
-========================= */
-
 #status {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 
   color: #22c55e;
 }
@@ -210,13 +177,13 @@ header p {
 .chart-container {
   background: #1e293b;
 
-  border-radius: 14px;
+  border-radius: 12px;
 
-  padding: 16px;
+  padding: 10px;
 
-  height: 420px;
+  height: 220px;
 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
 }
 
 canvas {
@@ -226,71 +193,61 @@ canvas {
 }
 
 /* =========================
-   TABLET
+   TABLET E DESKTOP
 ========================= */
 
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 1.7rem;
-  }
-
-  .chart-container {
-    height: 320px;
-  }
-
-  .value {
-    font-size: 1.8rem;
-  }
-
-  .card {
-    min-height: 110px;
-  }
-}
-
-/* =========================
-   CELULAR
-========================= */
-
-@media (max-width: 480px) {
+@media (min-width: 768px) {
   body {
-    padding: 14px;
+    padding: 20px;
+  }
+
+  header {
+    margin-bottom: 20px;
   }
 
   header h1 {
-    font-size: 1.4rem;
+    font-size: 2rem;
   }
 
   header p {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
   .cards {
-    flex-direction: column;
+    gap: 16px;
+
+    margin-bottom: 20px;
   }
 
   .card {
-    width: 100%;
+    padding: 16px;
 
-    min-height: 100px;
+    min-height: 120px;
 
-    padding: 14px;
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+  }
+
+  .card h2 {
+    font-size: 1rem;
+
+    margin-bottom: 8px;
   }
 
   .value {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 
   #status {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .chart-container {
-    height: 250px;
+    height: 420px;
 
-    padding: 12px;
-  }
-
-  #alerta {
-    font-size: 0.9rem;
+    padding: 16px;
   }
 }
