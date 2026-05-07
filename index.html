@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>IoT Dashboard Vercel</title>
+
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 12px;
+            width: 220px;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .temp {
+            color: #ef4444;
+        }
+
+        .hum {
+            color: #3b82f6;
+        }
+
+        #status {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #alerta {
+            display: none;
+            background: #ef4444;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 8px;
+            max-width: 400px;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 900px;
+            height: 400px;
+            margin: auto;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>📊 Dashboard IoT (ESP + HiveMQ + Vercel)</h2>
+
+    <div id="alerta">🚨 TEMPERATURA CRÍTICA!</div>
+
+    <div class="card">
+        📡 Status MQTT
+        <div id="status">DESCONECTADO</div>
+    </div>
+
+    <div class="card">
+        🌡️ Temperatura
+        <div id="temp" class="value temp">--</div>
+    </div>
+
+    <div class="card">
+        💧 Umidade
+        <div id="hum" class="value hum">--</div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="grafico"></canvas>
+    </div>
+
+    <script>
+
+        // ==========================
+        // CONFIG MQTT (HIVEMQ)
+        // ==========================
+        const client = mqtt.connect(
+            "wss://5f440b38e4174293bcaaa906d2d13a14.s1.eu.hivemq.cloud:8884/mqtt",
+            {
+                username: "expedito",
+                password: "!Sd36316176"
+            }
+        );
+
+        // ==========================
+        // GRAFICO
+        // ==========================
+        let chart;
+        let labels = [];
+        let tempData = [];
+        let humData = [];
+
+        const TEMP_ALERTA = 30;
+
+        function iniciarGrafico() {
+
+            const ctx = document.getElementById("grafico").getContext("2d");
+
+            chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Temperatura",
+                            borderColor: "red",
+                            data: tempData,
+                            fill: false
+                        },
+                        {
+                            label: "Umidade",
+                            borderColor: "blue",
+                            data: humData,
+                            fill: false
+                        }
+                    ]
+                }
+            });
+        }
+
+        // ==========================
+        // MQTT CONNECT
+        // ==========================
+        client.on("connect", () => {
+
+            document.getElementById("status").innerText = "ONLINE";
+            document.getElementById("status").style.color = "lime";
+
+            client.subscribe("casa/temperatura");
+            client.subscribe("casa/umidade");
+            client.subscribe("casa/status");
+        });
+
+        // ==========================
+        // MQTT MESSAGE
+        // ==========================
+        client.on("message", (topic, message) => {
+
+            const value = message.toString();
+            let agora = new Date().toLocaleTimeString();
+
+            // TEMPERATURA
+            if (topic === "casa/temperatura") {
+
+                let temp = parseFloat(value);
+
+                document.getElementById("temp").innerText = temp.toFixed(1) + " °C";
+
+                tempData.push(temp);
+                labels.push(agora);
+
+                if (temp >= TEMP_ALERTA) {
+                    document.getElementById("alerta").style.display = "block";
+                    document.body.style.background = "#7f1d1d";
+                } else {
+                    document.getElementById("alerta").style.display = "none";
+                    document.body.style.background = "#0f172a";
+                }
+            }
+
+            // UMIDADE
+            if (topic === "casa/umidade") {
+
+                let hum = parseFloat(value);
+
+                document.getElementById("hum").innerText = hum.toFixed(1) + " %";
+
+                humData.push(hum);
+            }
+
+            // LIMITE
+            if (labels.length > 60) {
+                labels.shift();
+                tempData.shift();
+                humData.shift();
+            }
+
+            if (chart) chart.update();
+        });
+
+        // ==========================
+        // INIT
+        // ==========================
+        window.onload = function () {
+            iniciarGrafico();
+        };
+
+    </script>
+
+</body>
+
+</html>
