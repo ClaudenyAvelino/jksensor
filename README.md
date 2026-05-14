@@ -38,14 +38,6 @@
 
 ---
 
-### **Como configurar a imagem no GitHub:**
-
-Para que a imagem apareça no seu README, faça o seguinte:
-1. Tire um print da tela do seu Dashboard (pode ser o site aberto no navegador).
-2. Salve a imagem com o nome `screenshot.png`.
-3. Suba essa imagem para a **pasta principal** do seu repositório no GitHub.
-4. No código acima, o trecho `![Preview da Aplicação](screenshot.png)` puxará essa imagem automaticamente.
-
 ### **Dica Extra para o Link:**
 Se você ainda não hospedou o site, recomendo usar o **GitHub Pages** (é gratuito):
 1. Vá nas **Settings** (Configurações) do seu repositório no GitHub.
