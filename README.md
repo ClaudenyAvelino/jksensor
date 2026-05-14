@@ -3,7 +3,7 @@
 > **Status do Projeto:** Concluído ✅  
 > **Acesse agora:** [🌐 Clique aqui para ver o Dashboard Online](https://jksensor.vercel.app/)
 
-![Preview da Aplicação](screenshot.png) 
+![Preview da Aplicação](/img/aplicacao.png) 
 *Legenda: Interface responsiva exibindo dados em tempo real e gráfico de tendências.*
 
 ## 🌟 Destaques do Projeto
